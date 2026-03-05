@@ -1,0 +1,20 @@
+# Prometheus scrape config for CryptoArena v1.2
+# Run: docker-compose -f monitoring/docker-compose.yml up -d
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    project: crypto-arena
+    version: '1.2'
+
+scrape_configs:
+  - job_name: arena_core
+    static_configs:
+      - targets: ['host.docker.internal:8000']
+    metrics_path: /metrics
+    scheme: http
+
+  - job_name: prometheus
+    static_configs:
+      - targets: ['localhost:9090']

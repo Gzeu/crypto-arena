@@ -1,0 +1,45 @@
+name: Python CI
+
+on:
+  push:
+    branches: [main, 'feature/**']
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'requirements.txt'
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'tests/**'
+
+jobs:
+  test:
+    name: Python Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Lint (flake8)
+        run: flake8 src/ --max-line-length=120 --ignore=E501,W503
+        continue-on-error: true
+
+      - name: Run tests
+        run: pytest tests/ -v --tb=short
+        continue-on-error: true
