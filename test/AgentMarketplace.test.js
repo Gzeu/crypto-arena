@@ -31,7 +31,7 @@ describe("AgentMarketplace", function () {
     );
 
     // Mint NFT to seller
-    await agentNFT.connect(owner).safeMint(seller.address, TOKEN_ID);
+    await agentNFT.connect(owner).mintAgent("test-agent-1", seller.address, "ipfs://QmTest");
 
     // Approve marketplace to spend seller's NFT
     await agentNFT.connect(seller).approve(await marketplace.getAddress(), TOKEN_ID);
