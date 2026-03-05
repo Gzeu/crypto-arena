@@ -1,0 +1,114 @@
+# =============================================================
+# CryptoArena — Agent Configurations
+# =============================================================
+
+agents:
+  - id: "A1"
+    name: "BTC Trend Follower"
+    archetype: "trend_follower"
+    focus: ["BTC"]
+    risk_profile:
+      max_position_pct: 0.18
+      preferred_leverage: 2.0
+      max_leverage: 4.0
+      risk_tolerance: "medium"
+    strategy_params:
+      entry: "breakout_confirmation"
+      trend_indicator: "EMA_crossover"
+      momentum_filter: "RSI_60_threshold"
+
+  - id: "A2"
+    name: "ETH Swing Trader"
+    archetype: "swing_mean_reversion"
+    focus: ["ETH"]
+    risk_profile:
+      max_position_pct: 0.15
+      preferred_leverage: 1.5
+      max_leverage: 3.0
+      risk_tolerance: "medium"
+    strategy_params:
+      entry: "oversold_bounce"
+      oscillator: "RSI_30_below"
+      target_range_pct: 0.10
+
+  - id: "A3"
+    name: "SOL Short / Hedge Specialist"
+    archetype: "short_hedger"
+    focus: ["SOL"]
+    risk_profile:
+      max_position_pct: 0.15
+      preferred_leverage: 2.0
+      max_leverage: 4.0
+      risk_tolerance: "medium-high"
+    strategy_params:
+      entry: "resistance_rejection"
+      pattern_filter: "head_and_shoulders"
+      hedge_instrument: "SOL-PERP"
+
+  - id: "A4"
+    name: "Meme Sniper"
+    archetype: "meme_sniper"
+    focus: ["MEME_TOP3"]
+    risk_profile:
+      max_position_pct: 0.10
+      preferred_leverage: 1.0
+      max_leverage: 2.0
+      risk_tolerance: "high"
+    strategy_params:
+      entry: "volume_spike_breakout"
+      volume_multiplier_threshold: 3.0
+      hold_duration_max_hours: 6
+
+  - id: "A5"
+    name: "DeFi / Basis Trader"
+    archetype: "defi_basis"
+    focus: ["BTC", "ETH", "SOL", "DeFi_LP"]
+    risk_profile:
+      max_position_pct: 0.20
+      preferred_leverage: 1.0
+      max_leverage: 2.0
+      risk_tolerance: "low-medium"
+    strategy_params:
+      entry: "funding_rate_threshold"
+      min_annual_funding_rate: 0.15
+      basis_arb_min_spread_pct: 0.005
+
+  - id: "A6"
+    name: "Prediction Market Agent"
+    archetype: "prediction_market"
+    focus: ["Polymarket", "prediction_events"]
+    risk_profile:
+      max_position_pct: 0.08
+      preferred_leverage: 1.0
+      max_leverage: 1.0
+      risk_tolerance: "medium"
+    strategy_params:
+      min_edge_pct: 0.05
+      max_book_pct: 0.50
+      kelly_fraction: 0.25
+
+  - id: "A7"
+    name: "Risk-Adjusted Index Agent"
+    archetype: "index_balanced"
+    focus: ["BTC", "ETH", "SOL"]
+    risk_profile:
+      max_position_pct: 0.33
+      preferred_leverage: 1.0
+      max_leverage: 1.5
+      risk_tolerance: "low"
+    strategy_params:
+      rebalance_trigger_drift_pct: 0.05
+      target_weights: { "BTC": 0.50, "ETH": 0.30, "SOL": 0.20 }
+
+  - id: "A8"
+    name: "Chaos / Exploration Agent"
+    archetype: "chaos_exploration"
+    focus: ["BTC", "ETH", "SOL", "MEME_TOP3"]
+    risk_profile:
+      max_position_pct: 0.05
+      preferred_leverage: 1.0
+      max_leverage: 2.0
+      risk_tolerance: "very_high"
+    strategy_params:
+      exploration_random_seed: null
+      min_signal_novelty_score: 0.6

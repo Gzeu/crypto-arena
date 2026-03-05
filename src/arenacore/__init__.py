@@ -1,0 +1,1 @@
+# ArenaCore — main orchestrator package

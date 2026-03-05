@@ -1,0 +1,55 @@
+# =============================================================
+# CryptoArena — Global Game Configuration
+# =============================================================
+
+game:
+  name: "CryptoArena"
+  version: "1.0.0-mvp"
+  launched: "2026-03-05"
+
+  execution_mode: "simulation"   # simulation | live
+  chain_meta: "base"             # base | multiversx
+
+capital:
+  initial_usdc_per_agent: 10000
+  currency: "USDC"
+
+risk:
+  max_position_pct: 0.20         # 20% of portfolio per position
+  max_leverage: 5.0
+  daily_max_drawdown_pct: 0.15   # 15%
+  require_stop_loss: true
+  require_take_profit: true
+
+cycles:
+  micro_interval_seconds: 300    # 5 minutes
+  meso_interval_seconds: 3600    # 1 hour
+  macro_interval_seconds: 86400  # 24 hours (daily reflection)
+
+market:
+  majors:
+    - BTC
+    - ETH
+    - SOL
+  meme_slots: 3                  # top N meme coins by 24h volume
+  data_sources:
+    primary: "coingecko"
+    secondary:
+      - "binance"
+      - "dexscreener"
+      - "pyth"
+    prediction_markets:
+      - "polymarket"
+    onchain:
+      - "dune"
+      - "flipside"
+
+narrative:
+  chronicle_frequency: "daily"
+  social_output:
+    - "x_post"
+    - "discord"
+
+leaderboard:
+  pnl_weight: 0.70
+  narrative_score_weight: 0.30
