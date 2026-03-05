@@ -1,0 +1,108 @@
+{
+  "mode": "production",
+  "version": "1.0.0-mvp",
+  "environment": {
+    "required_vars": [
+      "COINGECKO_API_KEY",
+      "COINMARKETCAP_API_KEY",
+      "OPENAI_API_KEY"
+    ],
+    "optional_vars": [
+      "POLYMARKET_API_KEY",
+      "TELEGRAM_BOT_TOKEN",
+      "DISCORD_WEBHOOK_URL",
+      "ALCHEMY_API_KEY",
+      "INFURA_API_KEY"
+    ]
+  },
+  "database": {
+    "type": "sqlite",
+    "path": "data/arena.db",
+    "backup_enabled": true,
+    "backup_interval_hours": 24
+  },
+  "blockchain": {
+    "network": "base",
+    "rpc_url": "https://mainnet.base.org",
+    "deploy_contracts": true,
+    "contract_addresses": {
+      "leaderboard": "",
+      "arena_token": ""
+    }
+  },
+  "game": {
+    "cycle_interval_minutes": 60,
+    "starting_capital": 100000,
+    "mode": "paper",
+    "agents": {
+      "enabled": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
+        "A6",
+        "A7",
+        "A8"
+      ],
+      "allow_parallel_execution": true
+    }
+  },
+  "risk": {
+    "max_position_size_pct": 15,
+    "max_daily_loss_pct": 5,
+    "max_leverage": 3,
+    "require_stop_loss": true,
+    "max_correlation": 0.7
+  },
+  "monitoring": {
+    "enabled": true,
+    "port": 8000,
+    "host": "0.0.0.0",
+    "metrics_interval_seconds": 60,
+    "health_check_interval_seconds": 30,
+    "alerts": {
+      "telegram_enabled": false,
+      "discord_enabled": false,
+      "email_enabled": false
+    }
+  },
+  "api": {
+    "rate_limits": {
+      "coingecko": {
+        "calls_per_minute": 50,
+        "burst": 10
+      },
+      "coinmarketcap": {
+        "calls_per_minute": 30,
+        "burst": 5
+      },
+      "polymarket": {
+        "calls_per_minute": 60,
+        "burst": 10
+      }
+    },
+    "timeout_seconds": 10,
+    "retry_attempts": 3
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "logs/arena.log",
+    "max_bytes": 10485760,
+    "backup_count": 5,
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  },
+  "narrative": {
+    "enabled": true,
+    "model": "gpt-4",
+    "temperature": 0.7,
+    "max_tokens": 500,
+    "daily_report_time": "00:00"
+  },
+  "reflection": {
+    "enabled": true,
+    "reflection_interval_hours": 24,
+    "learning_rate": 0.1,
+    "memory_retention_days": 30
+  }
+}
