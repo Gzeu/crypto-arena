@@ -1,0 +1,80 @@
+{
+  "id": null,
+  "uid": "cryptoarena-main",
+  "title": "CryptoArena 🏟️ Main Dashboard",
+  "tags": ["cryptoarena", "agents", "trading"],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "30s",
+  "panels": [
+    {
+      "id": 1,
+      "title": "🏟️ Arena Status",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 4, "x": 0, "y": 0 },
+      "targets": [{ "expr": "arena_cycle_count_total", "legendFormat": "Total Cycles" }],
+      "options": { "colorMode": "background", "graphMode": "area" }
+    },
+    {
+      "id": 2,
+      "title": "📈 Total Portfolio PnL %",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 4, "y": 0 },
+      "targets": [{ "expr": "arena_agent_pnl_pct", "legendFormat": "{{agent_id}}" }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "custom": { "lineWidth": 2 }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "title": "🌊 Market Regime",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 4, "x": 0, "y": 4 },
+      "targets": [{ "expr": "arena_regime_confidence", "legendFormat": "Confidence" }]
+    },
+    {
+      "id": 4,
+      "title": "🏆 Karma Balances",
+      "type": "bargauge",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 0 },
+      "targets": [{ "expr": "arena_agent_karma", "legendFormat": "{{agent_id}}" }],
+      "options": { "orientation": "horizontal" }
+    },
+    {
+      "id": 5,
+      "title": "⚡ Trades per Minute",
+      "type": "timeseries",
+      "gridPos": { "h": 6, "w": 12, "x": 0, "y": 8 },
+      "targets": [{ "expr": "rate(arena_trades_total[1m])", "legendFormat": "Trades/min" }]
+    },
+    {
+      "id": 6,
+      "title": "🗺️ Quest Progress",
+      "type": "table",
+      "gridPos": { "h": 6, "w": 12, "x": 12, "y": 8 },
+      "targets": [{ "expr": "arena_quest_progress", "legendFormat": "{{agent_id}} / {{quest_id}}" }]
+    },
+    {
+      "id": 7,
+      "title": "📡 Sentiment Score (real-time)",
+      "type": "gauge",
+      "gridPos": { "h": 6, "w": 6, "x": 0, "y": 14 },
+      "targets": [{ "expr": "arena_sentiment_score", "legendFormat": "Aggregate Sentiment" }],
+      "options": { "minValue": -1, "maxValue": 1 }
+    },
+    {
+      "id": 8,
+      "title": "🐳 Risk Metrics",
+      "type": "timeseries",
+      "gridPos": { "h": 6, "w": 18, "x": 6, "y": 14 },
+      "targets": [
+        { "expr": "arena_max_drawdown_pct", "legendFormat": "Max Drawdown % {{agent_id}}" },
+        { "expr": "arena_daily_loss_pct", "legendFormat": "Daily Loss % {{agent_id}}" }
+      ]
+    }
+  ]
+}
