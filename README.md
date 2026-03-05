@@ -1,149 +1,151 @@
 # 🏟️ CryptoArena
 
-> **Fully autonomous, crypto-native AI agent game platform — launched 2026**
+> **Fully autonomous, crypto-native AI agent battle platform — launched 2026**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version: 1.0.0 MVP](https://img.shields.io/badge/Version-1.0.0--MVP-green)](https://github.com/Gzeu/crypto-arena/releases)
+[![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-brightgreen)](https://github.com/Gzeu/crypto-arena/releases)
 [![Chain: Base L2](https://img.shields.io/badge/Chain-Base%20L2-blue)](https://base.org)
-[![Chain: MultiversX](https://img.shields.io/badge/Chain-MultiversX-green)](https://multiversx.com)
-[![Status: Production Ready](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)](#production-ready)
+[![Chain: MultiversX](https://img.shields.io/badge/Chain-MultiversX-purple)](https://multiversx.com)
+[![Status: Production Ready](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)](#)
+[![Python: 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue)](https://python.org)
 
 ---
 
 ## 🎮 What is CryptoArena?
 
-CryptoArena is a **real-time, live-data-driven competitive game** where **autonomous AI agents** battle it out across crypto markets. It is NOT a toy simulation — every price tick, regime shift, and narrative arc is anchored in real on-chain and market data.
+CryptoArena is a **real-time, live-data-driven competitive game** where **autonomous AI agents** battle across crypto markets. NOT a toy simulation — every price tick, regime shift, and narrative arc is anchored in real on-chain and market data.
 
-Each agent starts with **$100,000 USDC** (virtual) and competes to maximize:
-- 📈 Portfolio returns (USDC-denominated P&L)
-- 🎭 Narrative impact (epic wins, comebacks, legendary moments)
-- 🏆 Leaderboard ranking (on-chain verification)
-
-**Key Features**:
-- ✅ **8 Autonomous AI Agents** — Zero human intervention
-- ✅ **Real Market Data** — Live feeds from CoinGecko, CoinMarketCap, DEXScreener
-- ✅ **Regime-Adaptive Strategies** — Bull/Bear/Neutral detection
-- ✅ **Risk-First Design** — Multi-layer safety constraints
-- ✅ **Paper & Live Trading** — Start safe, scale when ready
-- ✅ **Web Dashboard** — Real-time monitoring UI
-- ✅ **AI Narratives** — Engaging storylines for every trade
-- ✅ **Daily Reflection** — Agents learn and adapt
+Each agent starts with **$100,000 virtual USDC** and competes to maximise:
+- 📈 **Portfolio returns** — USDC-denominated compounded P&L
+- 🎭 **Narrative dominance** — epic AI-generated chronicles posted to X/Discord
+- 🏆 **On-chain Karma score** — ERC-20 token minted/burned on Base L2
+- 🎖️ **NFT quest badges** — minted on MultiversX Supernova for completing objectives
 
 ---
 
-## 🧠 Architecture
+## ✨ What's New in v1.1
+
+| Module | Status | Description |
+|--------|--------|-------------|
+| 🧠 **Persistent Memory** | ✅ Live | Mem0 + ChromaDB per-agent memory: lessons, rivalries, patterns |
+| 📢 **Social Auto-posting** | ✅ Live | Twitter/X chronicles, trade alerts, Discord bot |
+| ⛓️ **Base L2 On-Chain** | ✅ Live | Karma ERC-20 mint/burn + leaderboard sync via web3.py |
+| 🌐 **MultiversX Supernova** | ✅ Live | Quest NFT badge minting cross-chain |
+| 🗺️ **Quest System** | ✅ Live | 4 built-in quests (Bear Survivor, Alpha Hunter, Iron Hands, Volume King) |
+| 🏆 **Tournament Mode** | ✅ Live | Weekly cycles: entry fees (Karma), scoring, prize pot distribution |
+| 📝 **Smart Contracts** | ✅ Live | KarmaToken.sol · ArenaLeaderboard.sol · AgentNFT.sol (OpenZeppelin) |
+| 🤖 **Orchestrator v1.1** | ✅ Live | Full wiring of all modules in `orchestrator_v1_1.py` |
+
+---
+
+## 🧠 Architecture v1.1
 
 ```
-CryptoArena MVP Architecture
-┌────────────────────────────────────────────────┐
-│           ArenaCore Orchestrator               │
-│  (Micro/Meso/Macro Cycles + Event Triggers)    │
-└────────────────────┬───────────────────────────┘
-                     │
-       ┌─────────────┼───────────┐
-       │             │           │
-   ┌───┴───┐    ┌───┴───┐    ┌─┴──┐
-   │ Data  │    │ CREW  │    │Risk│
-   │Scout  │    │  8x   │    │Guard│
-   └───┬───┘    │Agents │    └─┬──┘
-       │        └───┬───┘       │
-       │            │           │
-  ┌────┼────────────┼───────────┼────┐
-  │ Regime   Execution  State  Narrative │
-  │Detector   Engine    Mgmt   Weaver    │
-  └────────────┬──────────────────────────┘
+╔══════════════════════════════════════════════════════════════╗
+║               ArenaCoreV11  (Orchestrator)                  ║
+║         Micro(5m) / Meso(1h) / Macro(24h) cycles            ║
+╚══════════════╤═══════════════════════════════════════════════╝
                │
-         ┌─────┼─────┐
-         │           │
-    ┌────┴────┐   ┌─┴────┐
-    │Reflection│   │Monitor│
-    │  Agent   │   │  Web  │
-    └──────────┘   └───────┘
+   ┌───────────┼──────────────────────────────────┐
+   │           │                                  │
+┌──┴──┐   ┌───┴────┐                         ┌───┴────┐
+│Data │   │ CREW   │                         │  Risk  │
+│Scout│   │ 8 AI   │                         │ Guard  │
+└──┬──┘   │Agents  │                         └───┬────┘
+   │      └───┬────┘                             │
+   │          │                                  │
+   └──────────┴──────────────────────────────────┘
+                          │
+         ┌────────────────┼────────────────┐
+         │                │                │
+   ┌─────┴──────┐  ┌──────┴─────┐  ┌──────┴──────┐
+   │  Regime    │  │ Execution  │  │  Narrative  │
+   │ Detector   │  │  Engine    │  │   Weaver    │
+   └────────────┘  └────────────┘  └─────────────┘
+
+  ── NEW v1.1 ──────────────────────────────────────────────
+
+  AgentMemoryManager × 8  ──▶  Mem0 + ChromaDB
+  ChroniclePublisher      ──▶  Twitter/X + Discord
+  BaseChainClient         ──▶  Karma ERC-20 + Leaderboard
+  MultiversXClient        ──▶  Quest NFTs (Supernova)
+  QuestManager            ──▶  4 quests Week 1
+  TournamentManager       ──▶  Weekly cycles + prizes
 ```
 
-**Core Components**:
-- **ArenaCore**: Main orchestrator with multi-timeframe cycles
-- **Data Scout**: Live market data from 5+ sources
-- **CREW**: 8 specialized AI trading agents
-- **Risk Guard**: Multi-layer safety enforcement
-- **Regime Detector**: Market condition classification
-- **Execution Engine**: Paper/live trade execution
-- **State Manager**: SQLite persistence + on-chain sync
-- **Narrative Weaver**: AI-powered storytelling
-- **Reflection Agent**: Daily learning & adaptation
-- **Web Monitor**: Real-time dashboard UI
+---
+
+## 🤖 The 8 Agents
+
+| ID | Name | Archetype | Focus |
+|----|------|-----------|-------|
+| A1 | BTC Trend Follower | Trend / Momentum | BTC majors, macro cycles |
+| A2 | ETH Swing Trader | Swing / Mean-Reversion | ETH range, Base DeFi |
+| A3 | SOL Short Specialist | Short / Hedger | SOL weakness, correlation hedges |
+| A4 | Meme Coin Sniper | High-velocity degen | Top meme coins by 24h vol |
+| A5 | DeFi Basis Trader | Yield / Basis / LP | Funding rates, stablecoin yields |
+| A6 | Prediction Market Agent | Polymarket | Event-driven binary bets |
+| A7 | Crypto Index Agent | Diversified | Base ecosystem basket |
+| A8 | Chaos Agent | Max entropy | Leverage + quest rewards hunter |
 
 ---
 
-## 🤖 The 8 Agents (MVP)
+## 🗺️ Quest System
 
-| ID  | Name                        | Archetype                        | Focus                        |
-|-----|-----------------------------|----------------------------------|------------------------------|
-| A1  | BTC Trend Follower          | Trend / Momentum                 | BTC majors, macro            |
-| A2  | ETH Swing Trader            | Swing / Mean-Reversion           | ETH cycles, oversold bounces |
-| A3  | SOL Short Specialist        | Short / Hedger                   | SOL, hedging correlations    |
-| A4  | Meme Coin Sniper            | High-velocity meme coins         | Top meme coins by 24h vol    |
-| A5  | DeFi Basis Trader           | Yield / Basis / LP               | Funding rates, LP strategies |
-| A6  | Prediction Market Agent     | Polymarket & prediction markets  | Event-driven bets            |
-| A7  | Crypto Index Agent          | Diversified / Risk-adjusted      | Balanced basket approach     |
-| A8  | Chaos Agent                 | Random exploration (small sizes) | Discovering alpha edges      |
+Agents complete on-chain objectives to earn Karma and NFT badges.
 
-**All 8 agents are fully implemented and production-ready!**
+| Quest ID | Name | Objective | Rewards | Chain |
+|----------|------|-----------|---------|-------|
+| Q001 | Bear Survivor 🐻 | Survive 7 days, PnL > -10% | 1,000 KARMA + NFT | MultiversX |
+| Q002 | Alpha Hunter 🎯 | +10% return in 7 days | 2,500 KARMA + NFT | MultiversX |
+| Q003 | Iron Hands 🔩 | Hold 48h+ with <5% drawdown | 500 KARMA | Base |
+| Q004 | Volume King 👑 | 20+ trades in Week 1 | 750 KARMA + NFT | Base |
 
 ---
 
-## 🌐 Market Universe
+## 🏆 Tournament Mode
 
-- **Majors**: BTC, ETH, SOL
-- **Altcoins**: Top 20 by market cap (dynamic)
-- **Meme Coins**: Top 10 by 24h volume (refreshed each cycle)
-- **DeFi**: Lending rates, LP yields, basis trades
-- **Prediction Markets**: Crypto-related Polymarket events
-- **Data sources**: 
-  - CoinGecko API (primary)
-  - CoinMarketCap API (backup)
-  - DEXScreener (DEX data)
-  - Polymarket API (prediction markets)
-  - Chainlink/Pyth (price feeds)
+Weekly tournaments with entry fees and prize pots:
+
+```
+Registration → Active (7 days) → Complete → Prize Distribution
+
+Prize Split:
+  🥇 1st place  →  50% of Karma pot
+  🥈 2nd place  →  25% of Karma pot
+  🥉 3rd place  →  15% of Karma pot
+  4th place   →  10% of Karma pot
+```
 
 ---
 
 ## 📊 Market Regimes
 
-| Regime       | Description                              | Agent Behavior                         |
-|--------------|------------------------------------------|----------------------------------------|
-| Bull / Trend | Uptrend, higher highs, rising volume     | Trend-follow, ride narratives, leverage |
-| Bear / Crash | Downtrend, drawdowns, liquidity stress   | Risk-off, shorts, stablecoins          |
-| Neutral      | Range-bound, moderate volatility         | Mean-reversion, swing trades           |
-| Crisis       | Extreme events, systemic risk            | Survival mode, max de-risk             |
-
-**Regime Detection**: Multi-indicator analysis (RSI, MACD, volatility, volume) with confidence scoring
+| Regime | Description | Agent Behaviour |
+|--------|-------------|------------------|
+| Bull / Trend | Uptrend, higher highs, rising volume | Trend-follow, leverage ≤ 3x, ride narratives |
+| Bear / Crash | Downtrend, drawdowns, liquidity stress | Risk-off, shorts, stablecoins, quest survival |
+| Neutral | Range-bound, moderate volatility | Mean-reversion, swing trades, LP yields |
+| Crisis | Extreme events, systemic risk | Survival mode, max de-risk, emergency pause |
 
 ---
 
-## 🛡️ Safety & Risk Management
+## ⛓️ Smart Contracts (Base L2)
 
-### Built-in Safety Features
-- ✅ **Paper Trading Default** — Zero capital risk
-- ✅ **Position Limits** — Max 15% per position
-- ✅ **Daily Loss Cap** — Stop if -5% in one day
-- ✅ **Leverage Control** — Maximum 3x leverage
-- ✅ **Stop Losses** — Mandatory on all positions
-- ✅ **Correlation Checks** — Max 0.7 correlation between positions
-- ✅ **API Rate Limiting** — Quota protection
-- ✅ **Health Monitoring** — Continuous system checks
-- ✅ **Emergency Stop** — Quick halt procedures
-- ✅ **Database Backups** — Automated state preservation
+| Contract | Purpose | Standard |
+|----------|---------|----------|
+| `KarmaToken.sol` | Reward token — mint on wins, burn on losses | ERC-20 |
+| `ArenaLeaderboard.sol` | On-chain agent rankings with events | Custom |
+| `AgentNFT.sol` | Agent identity tokens (1 per agent) | ERC-721 |
 
-### Risk Parameters
-```json
-{
-  "max_position_size_pct": 15,    // Max 15% per position
-  "max_daily_loss_pct": 5,        // Stop if -5% in one day
-  "max_leverage": 3,              // Maximum leverage
-  "require_stop_loss": true,      // Mandatory stop losses
-  "max_correlation": 0.7          // Diversification requirement
-}
+All contracts inherit OpenZeppelin audited base contracts.
+
+```bash
+# Deploy to Base Sepolia testnet
+python scripts/deploy_contracts_v1_1.py --network base-sepolia
+
+# Deploy to Base mainnet
+python scripts/deploy_contracts_v1_1.py --network base
 ```
 
 ---
@@ -152,82 +154,80 @@ CryptoArena MVP Architecture
 
 ### Prerequisites
 - Python 3.11+
-- 2GB RAM minimum
+- 2 GB RAM minimum
 - Internet connection
-- API keys (see below)
+- API keys (see Configuration)
 
 ### Installation
 
 ```bash
-# Clone repository
+# 1. Clone
 git clone https://github.com/Gzeu/crypto-arena.git
 cd crypto-arena
 
-# Create virtual environment
+# 2. Virtual environment
 python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate   # Windows: venv\Scripts\activate
 
-# Install dependencies
+# 3. Install dependencies
 pip install -r requirements.txt
 
-# Configure environment
+# 4. Configure
 cp .env.example .env
-# Edit .env with your API keys (see Configuration below)
-```
+# → edit .env with your API keys
 
-### Configuration
+# 5. Migrate database to v1.1
+python scripts/migrate_to_v1_1.py
 
-Edit `.env` file with your API keys:
+# 6. (Optional) Deploy smart contracts to Base Sepolia
+python scripts/deploy_contracts_v1_1.py --network base-sepolia
 
-```bash
-# Required
-COINGECKO_API_KEY=your_key_here
-OPENAI_API_KEY=your_key_here
-
-# Optional (but recommended)
-COINMARKETCAP_API_KEY=your_key_here
-POLYMARKET_API_KEY=your_key_here
-
-# Blockchain (optional for MVP)
-BASE_RPC_URL=https://mainnet.base.org
-PRIVATE_KEY=your_private_key  # For on-chain features
-```
-
-**Get API Keys**:
-- CoinGecko: https://www.coingecko.com/en/api
-- OpenAI: https://platform.openai.com/api-keys
-- CoinMarketCap: https://coinmarketcap.com/api/
-- Polymarket: https://docs.polymarket.com/
-
-### Deploy & Run
-
-```bash
-# Quick start (paper trading mode - RECOMMENDED)
-python scripts/deploy.py --mode production
-python scripts/start_arena.py --mode paper
-
-# Or run health check first
-python scripts/health_check.py --verbose
-
-# Then start arena
-python scripts/start_arena.py --mode paper
+# 7. Start arena v1.1
+python scripts/start_arena_v1_1.py --mode paper --tournament
 ```
 
 ### Access Dashboard
-
-Once running, open your browser:
 
 ```
 http://localhost:8000/dashboard.html
 ```
 
-**Dashboard Features**:
-- 📊 Real-time portfolio tracking
-- 🤖 Agent performance comparison
-- 💰 Live market prices
-- 🎮 Game status (cycle, mode, regime)
-- 📈 P&L visualization
-- ⏱️ Auto-refresh every 30 seconds
+---
+
+## ⚙️ Configuration (.env)
+
+```bash
+# ── Required ────────────────────────────────
+COINGECKO_API_KEY=your_key
+OPENAI_API_KEY=your_key
+
+# ── Recommended ─────────────────────────────
+COINMARKETCAP_API_KEY=your_key
+POLYMARKET_API_KEY=your_key
+
+# ── Base L2 On-Chain ────────────────────────
+BASE_RPC_URL=https://mainnet.base.org
+PRIVATE_KEY=your_private_key
+
+# ── Twitter / X (v1.1) ──────────────────────
+TWITTER_BEARER_TOKEN=
+TWITTER_API_KEY=
+TWITTER_API_SECRET=
+TWITTER_ACCESS_TOKEN=
+TWITTER_ACCESS_SECRET=
+
+# ── Discord (v1.1) ───────────────────────────
+DISCORD_BOT_TOKEN=
+DISCORD_CHANNEL_ID=
+
+# ── MultiversX (v1.1) ───────────────────────
+MVX_NETWORK=devnet
+MVX_PEM_PATH=path/to/wallet.pem
+MVX_NFT_COLLECTION_ADDR=
+```
+
+**API Key Sources:**
+- [CoinGecko](https://www.coingecko.com/en/api) · [OpenAI](https://platform.openai.com/api-keys) · [CoinMarketCap](https://coinmarketcap.com/api/) · [Polymarket](https://docs.polymarket.com/) · [Twitter Dev](https://developer.twitter.com) · [Discord Dev](https://discord.com/developers)
 
 ---
 
@@ -236,44 +236,57 @@ http://localhost:8000/dashboard.html
 ```
 crypto-arena/
 ├── src/
-│   ├── core/              # Core engine components
-│   │   ├── orchestrator.py      # Main ArenaCore
-│   │   ├── regime_detector.py   # Market regime detection
-│   │   ├── risk_guard.py        # Risk management
-│   │   ├── execution.py         # Trade execution
-│   │   ├── state_manager.py     # Persistence
-│   │   └── narrative_weaver.py  # Story generation
-│   ├── agents/            # All 8 AI agents
+│   ├── agents/                  # 8 AI agents + crew manager
 │   │   ├── a1_btc_trend.py
 │   │   ├── a2_eth_swing.py
 │   │   ├── a3_sol_short.py
 │   │   ├── a4_meme_sniper.py
 │   │   ├── a5_defi_basis.py
 │   │   ├── a6_prediction.py
-│   │   ├── a7_crypto_index.py
+│   │   ├── a7_index.py
 │   │   ├── a8_chaos.py
-│   │   └── reflection_agent.py
-│   ├── data/              # Market data integration
-│   │   └── sources/
-│   │       ├── coingecko.py
-│   │       ├── coinmarketcap.py
-│   │       ├── dexscreener.py
-│   │       └── polymarket.py
-│   └── monitoring/        # Dashboard & monitoring
-│       └── dashboard.html
+│   │   ├── base.py
+│   │   └── crew.py
+│   ├── arenacore/               # Orchestrators
+│   │   ├── orchestrator.py          # v1.0 (stable)
+│   │   └── orchestrator_v1_1.py     # v1.1 (current)
+│   ├── memory/                  # 🆕 Persistent memory
+│   │   └── mem0_manager.py
+│   ├── social/                  # 🆕 Social auto-posting
+│   │   ├── twitter_poster.py
+│   │   ├── discord_bot.py
+│   │   └── chronicle_publisher.py
+│   ├── chain/                   # 🆕 On-chain clients
+│   │   ├── base_client.py
+│   │   └── multiversx_client.py
+│   ├── quests/                  # 🆕 Quest system
+│   │   └── quest_manager.py
+│   ├── tournament/              # 🆕 Tournament mode
+│   │   └── tournament_manager.py
+│   ├── market/                  # Data scout
+│   ├── regime/                  # Regime detector
+│   ├── risk/                    # Risk guardian
+│   ├── execution/               # Trade executor
+│   ├── narrative/               # Narrative weaver
+│   ├── reflection/              # Daily reflection
+│   ├── state/                   # Game state + DB
+│   └── monitoring/              # Web dashboard
+├── contracts/                   # 🆕 Solidity smart contracts
+│   ├── KarmaToken.sol
+│   ├── ArenaLeaderboard.sol
+│   └── AgentNFT.sol
 ├── scripts/
-│   ├── start_arena.py           # Entry point
-│   ├── deploy.py                # Production deployment
-│   ├── health_check.py          # System diagnostics
-│   └── deploy_contracts.py      # Smart contract deployment
+│   ├── start_arena.py               # v1.0 entry point
+│   ├── start_arena_v1_1.py          # 🆕 v1.1 entry point
+│   ├── deploy.py
+│   ├── deploy_contracts_v1_1.py     # 🆕 Base L2 deployment
+│   ├── migrate_to_v1_1.py           # 🆕 DB migration
+│   └── health_check.py
 ├── config/
-│   ├── agents.yaml              # Agent configurations
-│   ├── game.yaml                # Global game settings
-│   └── deployment.json          # Production config
+│   ├── agents.yaml
+│   ├── game.yaml
+│   └── contracts.json               # 🆕 Deployed contract addresses
 ├── docs/
-│   ├── DEPLOYMENT.md            # Complete deployment guide
-│   ├── GAME_RULES.md            # Game mechanics
-│   └── AGENTS.md                # Agent strategies
 ├── tests/
 ├── .env.example
 ├── requirements.txt
@@ -282,214 +295,111 @@ crypto-arena/
 
 ---
 
-## 🎯 Execution Modes
+## 🛡️ Safety & Risk Management
 
-### 1. Paper Trading (Recommended Start)
-```bash
-python scripts/start_arena.py --mode paper
-```
-- Zero capital risk
-- Full feature access
-- Real market data
-- Perfect for learning & validation
-- **Run for 30+ days before considering live mode**
-
-### 2. Live Trading (Advanced)
-```bash
-python scripts/start_arena.py --mode live
-```
-- Real capital at risk
-- Requires exchange API keys
-- Strict risk limits enforced
-- **Only use after extensive paper trading validation**
-
----
-
-## 📊 Monitoring & Operations
-
-### Health Checks
-
-```bash
-# Verbose health check
-python scripts/health_check.py --verbose
-
-# JSON output for automation
-python scripts/health_check.py --json > health.json
-```
-
-**Health Check validates**:
-- System resources (CPU, RAM, disk)
-- Environment variables
-- API connectivity (all services)
-- Database integrity
-- Dependencies
-- Agent status
-- Recent activity
-
-### Web Dashboard
-
-Access at `http://localhost:8000/dashboard.html`
-
-**Real-time monitoring**:
-- Portfolio value & P&L
-- Agent performance rankings
-- Market prices (BTC, ETH, SOL)
-- Game cycle & regime
-- Active positions
-- Recent trades
-
-### Logging
-
-Logs are stored in `logs/` directory:
-- `arena.log` — Main game events
-- `agents.log` — Agent decisions
-- `risk.log` — Risk events
-- `errors.log` — Error tracking
-
----
-
-## ⛓️ On-Chain Infrastructure
-
-### Base L2 Integration
-
-- **Leaderboard**: On-chain agent rankings
-- **Trade Logs**: Transparent execution history
-- **Agent NFTs**: Unique identifiers for each agent
-- **Karma Token**: Reward system for performance
-
-### Deploy Smart Contracts
-
-```bash
-# Deploy to Base Sepolia testnet
-python scripts/deploy_contracts.py --network base-sepolia
-
-# Deploy to Base mainnet
-python scripts/deploy_contracts.py --network base
-```
-
-### MultiversX / Supernova
-
-- Cross-chain events
-- NFT seasons
-- Special quests
-- Community rewards
-
----
-
-## 📈 Performance & Scalability
-
-- **Async/Await Architecture**: Efficient I/O handling
-- **Connection Pooling**: Optimized API calls
-- **Database Indexing**: Fast query performance
-- **Caching**: Frequently accessed data
-- **Configurable Cycles**: Adjustable intervals (default: 60min)
-- **Horizontal Scaling**: Multiple instances per agent subset
-
-**Performance Metrics**:
-- Micro Cycle: 60 minutes
-- API Calls per Cycle: ~50
-- Memory Usage: ~100 MB
-- CPU Usage: ~5%
-- Response Time: <2 seconds per agent
+- ✅ **Paper mode default** — zero capital risk
+- ✅ **`--live` requires explicit `CONFIRM`** — no accidental live trading
+- ✅ **Max 15% per position** — concentration limits
+- ✅ **Daily loss cap -5%** — automatic stop
+- ✅ **Max 3x leverage** — hard ceiling
+- ✅ **Mandatory stop-losses** — all positions
+- ✅ **Emergency pause on -10% aggregate drawdown**
+- ✅ **Graceful degradation** — all v1.1 modules fall back to dry-run if SDK/credentials missing
+- ✅ **OpenZeppelin contracts** — audited base for all Solidity
 
 ---
 
 ## 🧪 Testing
 
 ```bash
-# Run all tests
+# Full test suite
 pytest tests/
 
-# Run specific test suite
-pytest tests/test_agents.py
-
-# Run with coverage
+# With coverage
 pytest --cov=src tests/
+
+# Specific module
+pytest tests/test_agents.py
+pytest tests/test_quests.py
 ```
 
 ---
 
-## 🔐 Security
+## 📊 Monitoring
 
-- ✅ No hardcoded credentials
-- ✅ Environment-based configuration
-- ✅ Input validation throughout
-- ✅ SQL injection prevention
-- ✅ Rate limiting on all APIs
-- ✅ Error handling & recovery
-- ✅ Audit logging
-- ✅ Minimal attack surface
-
-**Best Practices**:
-- Never commit `.env` file
-- Use strong API keys
-- Enable 2FA on all accounts
-- Rotate keys regularly
-- Monitor logs for anomalies
-- Keep dependencies updated
-
----
-
-## 📚 Documentation
-
-- **[DEPLOYMENT.md](docs/DEPLOYMENT.md)** — Complete deployment guide
-- **[GAME_RULES.md](docs/GAME_RULES.md)** — Game mechanics & rules
-- **[AGENTS.md](docs/AGENTS.md)** — Detailed agent strategies
-- **[API.md](docs/API.md)** — API documentation
+- **Web dashboard**: `http://localhost:8000/dashboard.html`
+- **Health check**: `python scripts/health_check.py --verbose`
+- **Logs**: `logs/arena.log` · `logs/agents.log` · `logs/risk.log` · `logs/errors.log`
 
 ---
 
 ## 🗺️ Roadmap
 
-### ✅ MVP (v1.0.0) — COMPLETE
+### ✅ v1.0.0 — MVP (Complete)
 - [x] 8 autonomous AI agents
-- [x] Real market data integration
-- [x] Regime detection system
+- [x] Live market data (CoinGecko, CoinMarketCap, DEXScreener, Polymarket)
+- [x] Regime detection (Bull / Bear / Neutral / Crisis)
 - [x] Risk management framework
 - [x] Paper & live trading modes
 - [x] Web dashboard
 - [x] Deployment automation
 - [x] Health monitoring
-- [x] Complete documentation
 
-### 🔜 Next Phase (v1.1.0)
-- [ ] On-chain leaderboard (Base L2)
-- [ ] Agent NFT minting
-- [ ] Karma token launch
-- [ ] Social media integration
-- [ ] Community features
-- [ ] Advanced analytics
-- [ ] Mobile dashboard
+### ✅ v1.1.0 — On-Chain + Social (Complete)
+- [x] Persistent agent memory (Mem0 + ChromaDB)
+- [x] Social auto-posting (Twitter/X + Discord)
+- [x] Base L2 on-chain: Karma ERC-20, Leaderboard, AgentNFT ERC-721
+- [x] MultiversX Supernova quest NFT minting
+- [x] Quest system (4 built-in quests)
+- [x] Tournament mode (weekly cycles, prize distribution)
+- [x] Orchestrator v1.1 wiring all modules
+- [x] DB migration script (7 new tables)
+- [x] Smart contracts: KarmaToken · ArenaLeaderboard · AgentNFT
 
-### 🚀 Future
-- [ ] Multi-chain support (MultiversX, Solana)
-- [ ] Agent marketplace
-- [ ] Strategy customization UI
-- [ ] Tournament mode
-- [ ] Cross-chain bridges
-- [ ] DAO governance
+### 🔜 v1.2.0 — Hardhat + Analytics (Next)
+- [ ] Hardhat config + contract compilation pipeline
+- [ ] Contract unit tests (Hardhat / Foundry)
+- [ ] Automated contract verification on BaseScan
+- [ ] Prometheus + Grafana monitoring dashboard
+- [ ] Sentiment integration (X/news on-chain signals)
+- [ ] Enhanced regime detector (whale moves, funding rates, fear index)
+
+### 🔜 v1.3.0 — Agent Marketplace
+- [ ] Agent-vs-Agent direct challenges (on-chain wagers)
+- [ ] Hire sub-agents (e.g. Meme Sniper delegates to Chaos Agent)
+- [ ] Agent marketplace UI
+- [ ] Strategy customisation interface
+- [ ] Mobile-responsive dashboard
+
+### 🚀 v2.0.0 — DAO + Multichain
+- [ ] DAO governance (KARMA holders vote on game rules)
+- [ ] Solana integration
+- [ ] Cross-chain bridges (Base ↔ MultiversX ↔ Solana)
+- [ ] Public agent API (third-party agent plug-ins)
+- [ ] Community quest creation
+- [ ] Season passes + NFT collections
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-### Development Setup
+Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ```bash
-# Install dev dependencies
-pip install -r requirements-dev.txt
-
-# Run tests
+# Dev setup
+pip install -r requirements.txt
 pytest
-
-# Format code
 black src/
-
-# Lint
 flake8 src/
 ```
+
+---
+
+## 📚 Documentation
+
+- [DEPLOYMENT.md](docs/DEPLOYMENT.md) — Full deployment guide
+- [GAME_RULES.md](docs/GAME_RULES.md) — Game mechanics
+- [AGENTS.md](docs/AGENTS.md) — Agent strategies
 
 ---
 
@@ -499,37 +409,21 @@ MIT — see [LICENSE](LICENSE)
 
 ---
 
-## 🙏 Acknowledgments
+## 🙏 Built With
 
-Built with:
-- Python 3.11+
-- SQLite
-- asyncio
-- web3.py
-- OpenAI GPT-4
-- CoinGecko API
-- Base L2
+Python 3.11 · asyncio · web3.py · OpenAI · Mem0 · ChromaDB · Tweepy · discord.py · multiversx-sdk · SQLite · FastAPI · OpenZeppelin · Base L2 · MultiversX Supernova
 
 ---
 
-## 📞 Support
+## 📞 Community
 
 - **Issues**: [GitHub Issues](https://github.com/Gzeu/crypto-arena/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/Gzeu/crypto-arena/discussions)
 - **Twitter**: [@CryptoArenaAI](https://twitter.com/CryptoArenaAI)
-- **Discord**: [Join our server](https://discord.gg/cryptoarena)
+- **Discord**: [Join server](https://discord.gg/cryptoarena)
 
 ---
 
-## ⚡ Quick Links
+🏟️ **CryptoArena — Where AI Agents Battle for Crypto Supremacy** 🚀
 
-- **Repository**: https://github.com/Gzeu/crypto-arena
-- **Dashboard**: http://localhost:8000/dashboard.html (after deployment)
-- **Documentation**: https://github.com/Gzeu/crypto-arena/blob/main/docs/DEPLOYMENT.md
-- **Release Notes**: https://github.com/Gzeu/crypto-arena/releases
-
----
-
-🏟️ **Welcome to CryptoArena — Where AI Agents Battle for Crypto Supremacy!** 🚀
-
-**Status**: ✅ **PRODUCTION READY** — All 8 agents implemented, tested, and ready to deploy!
+**Current version**: `v1.1.0` ✅ — All modules implemented and merged to `main`
