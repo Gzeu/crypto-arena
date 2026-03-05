@@ -1,95 +1,87 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
+// @title  ArenaLeaderboard
+// @notice On-chain leaderboard for CryptoArena v1.1
+//         Stores agent stats and emits events for indexers.
 
-/**
- * @title ArenaLeaderboard
- * @notice On-chain leaderboard for CryptoArena (Base L2)
- * @dev Records agent portfolios, PnL snapshots, and karma scores
- */
-contract ArenaLeaderboard is Ownable {
-    struct AgentScore {
-        string agentId;
-        string name;
-        int256 pnlUsdc;      // 6 decimals (USDC convention)
-        uint256 karmaScore;  // narrative + performance composite
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+
+contract ArenaLeaderboard is Ownable, ReentrancyGuard {
+
+    struct AgentStats {
+        address walletAddress;
+        uint256 nftTokenId;
+        int256  totalPnLCents;   // USDC-denominated, scaled x100
+        uint256 winRateBP;       // basis points (10000 = 100%)
+        uint256 karmaBalance;
+        uint256 rank;
         uint256 lastUpdate;
     }
 
-    mapping(string => AgentScore) public scores;
+    mapping(string => AgentStats) public agents;
     string[] public agentIds;
-    uint256 public seasonId;
-    uint256 public seasonStartTime;
 
-    event ScoreUpdated(string indexed agentId, int256 pnl, uint256 karma);
-    event SeasonStarted(uint256 indexed seasonId, uint256 startTime);
+    event AgentUpdated(
+        string  indexed agentId,
+        int256  pnl,
+        uint256 rank,
+        uint256 karma
+    );
 
-    constructor() {
-        seasonId = 1;
-        seasonStartTime = block.timestamp;
-    }
+    constructor() Ownable(msg.sender) {}
 
-    function updateScore(
-        string calldata agentId,
-        string calldata name,
-        int256 pnlUsdc,
-        uint256 karmaScore
+    // ---------- Write ----------
+
+    function updateAgent(
+        string  calldata agentId,
+        address walletAddress,
+        uint256 nftTokenId,
+        int256  totalPnLCents,
+        uint256 winRateBP,
+        uint256 karmaBalance,
+        uint256 rank
     ) external onlyOwner {
-        if (scores[agentId].lastUpdate == 0) {
+        require(walletAddress != address(0), "Invalid wallet");
+        if (agents[agentId].walletAddress == address(0)) {
             agentIds.push(agentId);
         }
-        scores[agentId] = AgentScore({
-            agentId: agentId,
-            name: name,
-            pnlUsdc: pnlUsdc,
-            karmaScore: karmaScore,
-            lastUpdate: block.timestamp
+        agents[agentId] = AgentStats({
+            walletAddress : walletAddress,
+            nftTokenId    : nftTokenId,
+            totalPnLCents : totalPnLCents,
+            winRateBP     : winRateBP,
+            karmaBalance  : karmaBalance,
+            rank          : rank,
+            lastUpdate    : block.timestamp
         });
-        emit ScoreUpdated(agentId, pnlUsdc, karmaScore);
+        emit AgentUpdated(agentId, totalPnLCents, rank, karmaBalance);
     }
 
-    function startNewSeason() external onlyOwner {
-        seasonId++;
-        seasonStartTime = block.timestamp;
-        // Reset all scores
-        for (uint256 i = 0; i < agentIds.length; i++) {
-            string memory id = agentIds[i];
-            scores[id].pnlUsdc = 0;
-            scores[id].karmaScore = 0;
-            scores[id].lastUpdate = block.timestamp;
-        }
-        emit SeasonStarted(seasonId, seasonStartTime);
+    // ---------- Read ----------
+
+    function getAgent(string calldata agentId)
+        external view
+        returns (AgentStats memory)
+    {
+        return agents[agentId];
     }
 
-    function getLeaderboard() external view returns (AgentScore[] memory) {
-        AgentScore[] memory leaderboard = new AgentScore[](agentIds.length);
-        for (uint256 i = 0; i < agentIds.length; i++) {
-            leaderboard[i] = scores[agentIds[i]];
-        }
-        return leaderboard;
+    function agentCount() external view returns (uint256) {
+        return agentIds.length;
     }
 
-    function getTopN(uint256 n) external view returns (AgentScore[] memory) {
-        require(n > 0 && n <= agentIds.length, "Invalid n");
-        AgentScore[] memory all = new AgentScore[](agentIds.length);
-        for (uint256 i = 0; i < agentIds.length; i++) {
-            all[i] = scores[agentIds[i]];
+    function getTopN(uint256 n)
+        external view
+        returns (string[] memory ids, AgentStats[] memory stats)
+    {
+        uint256 len = n < agentIds.length ? n : agentIds.length;
+        ids   = new string[](len);
+        stats = new AgentStats[](len);
+        for (uint256 i; i < len; ++i) {
+            ids[i]   = agentIds[i];
+            stats[i] = agents[agentIds[i]];
         }
-        // Bubble sort top N by karma (simple for MVP)
-        for (uint256 i = 0; i < n; i++) {
-            for (uint256 j = i + 1; j < agentIds.length; j++) {
-                if (all[j].karmaScore > all[i].karmaScore) {
-                    AgentScore memory temp = all[i];
-                    all[i] = all[j];
-                    all[j] = temp;
-                }
-            }
-        }
-        AgentScore[] memory topN = new AgentScore[](n);
-        for (uint256 i = 0; i < n; i++) {
-            topN[i] = all[i];
-        }
-        return topN;
     }
 }
